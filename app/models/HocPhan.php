@@ -17,6 +17,7 @@ class HocPhan
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
+    
     public function add($MaHP, $TenHP, $SoTinChi)
     {
         $query = "INSERT INTO " . $this->table_name . " (MaHP, TenHP, SoTinChi) VALUES (:MaHP, :TenHP, :SoTinChi)";
