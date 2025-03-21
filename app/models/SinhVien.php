@@ -41,5 +41,23 @@ class SinhVien
 
         return $stmt->execute();
     }
+
+    public function update($MaSV, $HoTen, $GioiTinh, $NgaySinh, $Hinh, $MaNganh)
+{
+    $query = "UPDATE " . $this->table_name . " 
+              SET HoTen = :HoTen, GioiTinh = :GioiTinh, NgaySinh = :NgaySinh, Hinh = :Hinh, MaNganh = :MaNganh 
+              WHERE MaSV = :MaSV";
+    $stmt = $this->conn->prepare($query);
+
+    $stmt->bindParam(':MaSV', $MaSV);
+    $stmt->bindParam(':HoTen', $HoTen);
+    $stmt->bindParam(':GioiTinh', $GioiTinh);
+    $stmt->bindParam(':NgaySinh', $NgaySinh);
+    $stmt->bindParam(':Hinh', $Hinh);
+    $stmt->bindParam(':MaNganh', $MaNganh);
+
+    return $stmt->execute();
+}
+
 }
 ?>

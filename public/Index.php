@@ -2,6 +2,7 @@
 include '../app/views/shares/header.php';
 include '../app/config/database.php'; 
 include '../app/models/SinhVien.php';
+
 // Khởi tạo kết nối và model SinhVien
 $database = new Database();
 $db = $database->getConnection();
@@ -31,16 +32,20 @@ $sinhViens = $sinhVienModel->getAll();
             <?php foreach ($sinhViens as $sv) : ?>
                 <tr>
                     <td class="py-2 px-4 border-b"><?= htmlspecialchars($sv->MaSV) ?></td>
-                    <td class="py-2 px-4 border-b"><?= htmlspecialchars($sv->HoTen) ?></td>
+                    <td class="py-2 px-4 border-b">
+                    <a href="Detail.php?MaSV=<?= htmlspecialchars($sv->MaSV) ?>" class="text-blue-500">
+                            <?= htmlspecialchars($sv->HoTen) ?>
+                        </a>
+                    </td>
                     <td class="py-2 px-4 border-b"><?= htmlspecialchars($sv->GioiTinh) ?></td>
                     <td class="py-2 px-4 border-b"><?= htmlspecialchars($sv->NgaySinh) ?></td>
                     <td class="py-2 px-4 border-b">
-                        <img src="../../uploads/<?= htmlspecialchars($sv->Hinh) ?>" alt="Avatar" class="h-12 w-12 rounded-full object-cover">
+                        <img src="../uploads/<?= htmlspecialchars($sv->Hinh) ?>" alt="Avatar" class="h-12 w-12 rounded-full object-cover">
                     </td>
                     <td class="py-2 px-4 border-b"><?= htmlspecialchars($sv->MaNganh) ?></td>
                     <td class="py-2 px-4 border-b">
-                        <a href="edit.php?MaSV=<?= $sv->MaSV ?>" class="text-blue-500">Edit</a> |
-                        <a href="delete.php?MaSV=<?= $sv->MaSV ?>" class="text-red-500">Delete</a>
+                        <a href="Edit.php?MaSV=<?= htmlspecialchars($sv->MaSV) ?>" class="text-blue-500">Edit</a>
+                        <a href="delete.php?MaSV=<?= htmlspecialchars($sv->MaSV) ?>" class="text-red-500">Delete</a>
                     </td>
                 </tr>
             <?php endforeach; ?>

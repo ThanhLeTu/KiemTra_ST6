@@ -1,6 +1,6 @@
 <?php
-include '../../config/database.php';
-include '../../app/models/SinhVien.php';
+include(__DIR__ . '/../config/database.php');
+include(__DIR__ . '/../models/SinhVien.php');
 
 class SinhVienController
 {
@@ -33,20 +33,28 @@ class SinhVienController
 
                 $Hinh = basename($_FILES["Hinh"]["name"]);
                 $target_file = $target_dir . $Hinh;
-                move_uploaded_file($_FILES["Hinh"]["tmp_name"], $target_file);
+                if (move_uploaded_file($_FILES["Hinh"]["tmp_name"], $target_file)) {
+                    $Hinh = "../app/uploads/" . $Hinh; // Save the relative path
+                }
             }
 
             // Thêm sinh viên vào database
             if ($this->sinhVienModel->add($MaSV, $HoTen, $GioiTinh, $NgaySinh, $Hinh, $MaNganh)) {
-                header("Location: ../../public/student_list.php?success=1");
+                header("Location: Create.php?success=1");
                 exit();
             } else {
-                header("Location: ../../public/student_list.php?error=1");
+                header("Location: Create.php?error=1");
                 exit();
             }
-        } else {
-            echo "Invalid request.";
-        }
+        } 
     }
+   
+    // Lấy sinh viên theo ID
+    public function getById($MaSV)
+    {
+        return $this->sinhVienModel->getById($MaSV);
+    }
+
+    
 }
 ?>

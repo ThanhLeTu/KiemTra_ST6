@@ -1,5 +1,6 @@
 <?php include '../shares/header.php';
-include '../Ki-m-tra-gk-ST6/app/controllers/SinhVienController.php';
+include(__DIR__ . '/../../controllers/SinhVienController.php');
+
 $controller = new SinhVienController();
 $controller->addStudent();
  ?>
@@ -17,7 +18,7 @@ $controller->addStudent();
     }
     ?>
 
-    <form action="process_add_student.php" method="POST" enctype="multipart/form-data">
+    <form action="Create.php" method="POST" enctype="multipart/form-data">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
                 <label class="block text-gray-700 font-bold">MaSV</label>
@@ -50,7 +51,7 @@ $controller->addStudent();
 
         <div class="mt-6">
             <button type="submit" class="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600">Create</button>
-            <a href="student_list.php" class="text-blue-500 ml-4">Back to List</a>
+            <a href="../../../public/Index.php" class="text-blue-500 ml-4">Back to List</a>
         </div>
     </form>
 </div>
